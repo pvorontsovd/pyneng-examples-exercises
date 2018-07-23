@@ -17,3 +17,16 @@
 '''
 
 ignore = ['duplex', 'alias', 'Current configuration']
+
+from sys import argv
+
+configFile, configFileCleared = argv[1:]
+
+with open(configFile, 'r') as f:
+    with open(configFileCleared, 'w') as output:
+        for command in f:
+            if command.startswith(f' {ignore[0]}') or \
+               command.startswith(ignore[1]) or command.startswith(ignore[2]):
+                continue
+            else:
+                output.write(command)
