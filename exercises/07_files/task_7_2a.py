@@ -13,3 +13,15 @@
 '''
 
 ignore = ['duplex', 'alias', 'Current configuration']
+
+from sys import argv
+
+configFile = argv[1]
+
+with open(configFile, 'r') as f:
+    for command in f:
+        if command.startswith('!') or command.startswith(f' {ignore[0]}') or \
+           command.startswith(ignore[1]) or command.startswith(ignore[2]):
+            continue
+        else:
+            print(command.rstrip())
