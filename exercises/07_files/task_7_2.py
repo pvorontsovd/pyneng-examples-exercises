@@ -12,3 +12,14 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+
+from sys import argv
+
+configFile = argv[1]
+
+with open(configFile, 'r') as f:
+    for command in f:
+        if command.startswith('!'):
+            continue
+        else:
+            print(command.rstrip())
