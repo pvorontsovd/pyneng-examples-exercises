@@ -14,3 +14,21 @@ Outbound Interface:    FastEthernet0/0
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
+
+with open('ospf.txt', 'r') as f:
+    for ospfRoute in f:
+        protocol    = ospfRoute.split()[0].replace('O', 'OSPF')
+        prefix      = ospfRoute.split()[1]
+        metric      = ospfRoute.split()[2].strip('[]')
+        nexthop     = ospfRoute.split()[4].rstrip(',')
+        lastupdate  = ospfRoute.split()[5].rstrip(',')
+        interface   = ospfRoute.split()[6]
+
+        print(f'''
+        Protocol:              {protocol}
+        Prefix:                {prefix}
+        AD/Metric:             {metric}
+        Next-Hop:              {nexthop}
+        Last update:           {lastupdate}
+        Outbound Interface:    {interface}
+        ''')
