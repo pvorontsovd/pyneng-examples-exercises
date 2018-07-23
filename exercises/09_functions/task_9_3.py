@@ -21,3 +21,32 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+
+def get_int_vlan_map(configFile):
+    with open(configFile, 'r') as f:
+        config = f.read().split('\n!')
+
+    access, trunk = {}, {}
+
+    for line in config:
+        if line.strip().startswith('interface F'):
+            interface = line.strip().split('\n ')
+            mode = None
+            for command in interface:
+                if command.startswith('interface'):
+                    iface = command.split()[-1]
+                if command.startswith('switchport mode'):
+                    mode = command.split()[-1]
+                if (command.startswith('switchport access') or
+                      command.startswith('switchport trunk')):
+                    vlan = command.split()[-1]
+            if mode == 'access':
+                access[iface] = int(vlan)
+            if mode == 'trunk':
+                vlans = vlan.split(',')
+                trunk[iface] = [ int(vlan) for vlan in vlans ]
+    return access, trunk
+
+
+a = get_int_vlan_map('config_sw1.txt')
+print(a)
