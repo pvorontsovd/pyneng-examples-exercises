@@ -19,3 +19,19 @@ D: 224-239
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+
+ipAdress = input('введите ip адрес: ')
+
+ipAdressList = ipAdress.split('.')
+firstOctet = int(ipAdress.split('.')[0])
+
+if 1 <= firstOctet <= 223:
+    print('unicast')
+elif 224 <= firstOctet <= 239:
+    print('multicast')
+elif ipAdress == '255.255.255.255':
+    print('local broadcast')
+elif ipAdress == '0.0.0.0':
+    print('unassigned')
+else:
+    print('unused')
