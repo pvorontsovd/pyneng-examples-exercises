@@ -19,3 +19,10 @@
 '''
 
 IP = '192.168.3.1'
+
+oIP = list(int(i) for i in IP.split('.'))
+
+print(f'''\
+{oIP[0]:<8}  {oIP[1]:<8}  {oIP[2]:<8}  {oIP[3]:<8}
+{oIP[0]:08b}  {oIP[1]:08b}  {oIP[2]:08b}  {oIP[3]:08b}\
+''')
