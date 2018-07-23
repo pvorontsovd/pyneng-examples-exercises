@@ -11,3 +11,8 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
+
+with open('CAM_table.txt', 'r') as f:
+    table = f.readlines()[6:]
+    table.sort()
+    print(''.join(table))
