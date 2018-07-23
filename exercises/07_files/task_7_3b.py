@@ -11,3 +11,12 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
+
+vlan = input('введите номер VLAN: ')
+
+with open('CAM_table.txt', 'r') as f:
+    table = f.readlines()[6:]
+    table.sort()
+    for line in table:
+        if line.startswith(f' {vlan}'):
+            print(line.strip())
