@@ -17,3 +17,21 @@ num_list = [10, 2, 30, 100, 10, 50, 11, 30, 15, 7]
 word_list = [
     'python', 'ruby', 'perl', 'ruby', 'perl', 'python', 'ruby', 'perl'
 ]
+
+num = int(input('число из списка num_list: '))
+
+num_list.reverse()
+index = (num_list.index(num))
+num_list.pop(num_list.index(num))
+num_list.insert(index, 'boo')
+num_list.reverse()
+print(num_list.index('boo'))
+
+word = (input('слово из word_list: '))
+
+word_list.reverse()
+index = (word_list.index(word))
+word_list.pop(word_list.index(word))
+word_list.insert(index, 'boo')
+word_list.reverse()
+print(word_list.index('boo'))
