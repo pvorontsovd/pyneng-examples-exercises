@@ -36,3 +36,32 @@ def ignore_command(command, ignore):
     * False - если нет
     '''
     return any(word in command for word in ignore)
+
+
+def config_to_dict(config_file):
+    config = []
+    with open(config_file, 'r') as f:
+        for line in f:
+            if line.startswith('!') or ignore_command(line, ignore):
+                continue
+            config.append(line.rstrip())
+
+    dict_config = {key: [] for key in config if not key.startswith(' ')}
+
+    for key in dict_config:
+        index = config.index(key)
+        while True:
+            try:
+                elem = config[index + 1]
+                if elem.startswith(' '):
+                    dict_config[key].append(elem)
+                    index += 1
+                else:
+                    break
+            except IndexError:
+                break
+
+    return dict_config
+
+
+print(config_to_dict('config_sw1.txt'))
