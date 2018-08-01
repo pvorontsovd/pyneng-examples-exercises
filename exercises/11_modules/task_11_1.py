@@ -27,3 +27,26 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+
+with open ('sw1_sh_cdp_neighbors.txt', 'r') as f:
+    cdp_output = f.read()
+
+
+def parse_cdp_neighbors(cdp_output):
+    cdp_arr = []
+    for line in cdp_output.split('\n'):
+        cdp_arr.append(line)
+
+    connections = {}
+    hostname = cdp_arr[0].split('>')[0]
+    for line in cdp_arr[6:-1]:
+        neighbor, local_name, local_num, *other, remote_name, remote_num = \
+        line.split()
+        connections[(hostname, local_name + local_num)] = \
+                     (neighbor, remote_name + remote_num)
+
+    return connections
+
+
+if __name__ == "__main__":
+    print(parse_cdp_neighbors(cdp_output))
