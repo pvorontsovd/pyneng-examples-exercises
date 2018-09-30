@@ -21,3 +21,18 @@ Reachable    Unreachable
 То есть, до выполнения функции и после списки должны выглядеть одинаково.
 
 '''
+
+from task_12_2 import check_ip_addresses, parse_arguments
+from sys import argv
+from tabulate import tabulate
+
+data = argv[1:]
+
+
+def ip_table(reacheble, unreacheble):
+    print(tabulate({'Reachable': reacheble, 'Unreachable': unreacheble},
+                    headers='keys'))
+
+
+reacheble, unreacheble = check_ip_addresses(parse_arguments(data))
+ip_table(reacheble, unreacheble)
